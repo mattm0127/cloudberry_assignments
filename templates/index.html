@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Application</title>
+    <style>
+        .home {
+            display: block;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        .home-form {
+            display: inline-block;
+            text-align: left;
+        }
+
+        .home-form-button {
+            display: block;
+            text-align: center;
+        }
+
+        h1 {
+            color: #a0ccab
+        }
+
+        input[type='text'] {
+            border: 1px solid #ccc;
+            border-radius: 40px;
+            padding: 10px;
+            font-family: sans-serif;
+            color:#81ac8b
+        }
+
+        input[type='submit'] {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding-right: 20px;
+            padding-left: 20px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            cursor: pointer;
+        }
+
+        input[type='submit']:hover {
+            background-color: #c5eccf
+        }
+
+        textarea[id='fact'] {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            width: 100%;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="home">
+        <div class="home-title">
+            <h1>Welcome to My First App!</h1>
+        </div>
+        <div class="home-form">
+            <form method="POST">
+                <div class="home-form-name">
+                    <label for="name">Name: </label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <br>
+                <div class="home-form-text">
+                    <label for="fact">Tell a fact about yourself:</label>
+                    <br>
+                    <textarea id="fact" name="fact" rows="2"></textarea>
+                </div>    
+                <br>
+                <div class="home-form-button">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

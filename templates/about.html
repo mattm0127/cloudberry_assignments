@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .about {
+            display: block;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        .about-welcome-text {
+            display: inline-block;
+            width:300px
+        }
+
+        h1 {
+            color: #a0ccab
+        }
+
+        button[id='home'] {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding-right: 20px;
+            padding-left: 20px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            cursor: pointer;
+        }
+
+        button[id='home']:hover {
+            background-color: #c5eccf
+        }
+        p[id="welcome-fact"]{
+            font-weight: bold;
+        }
+        span[id="user-name"]{
+            font-weight: bold;
+            color:#9dc5a7
+        }
+
+    </style>
+    <title>About</title>
+</head>
+<body>
+    <div class="about">
+        <div class="about-title">
+            <h1>About You!</h1>
+        </div>
+        <div class="about-welcome">
+            <p>
+                <span id="welcome-name">Welcome</span>
+                <span id="user-name">{{name}}!</span>
+            </p>
+            <p id="welcome-yousaid">You Said:</p>
+            <div class="about-welcome-text">
+                <p id="welcome-fact">"{{fact}}"</p>
+            </div>
+            <p id="welcome-response">Thats so cool!</p>
+            <a href="{{url_for('home')}}" ><button id="home">Home</button></a>
+        </div>
+    </div>
+</body>
+</html>
