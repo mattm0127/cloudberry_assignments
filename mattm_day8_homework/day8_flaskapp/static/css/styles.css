@@ -1,0 +1,110 @@
+.home {
+    display: block;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.home-form {
+    display: inline-block;
+    text-align: left;
+}
+
+.form-button {
+    display: block;
+    text-align: center;
+}
+
+h1 {
+    color: #a0ccab
+}
+
+input[type='text'] {
+    border: 1px solid #ccc;
+    border-radius: 40px;
+    padding: 10px;
+    font-family: sans-serif;
+    color:#81ac8b
+}
+
+textarea[id='ta-input'] {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+button[type='submit'] {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type='submit']:hover {
+    background-color: #c5eccf
+}
+
+
+
+.about {
+    display: block;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.about-welcome-text {
+    display: inline-block;
+    width:300px
+}
+
+.styled-btn-link {
+    border: 1px solid #ccc;
+    background-color: #f0efef;
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.styled-btn-link:hover {
+    background-color: #c5eccf
+}
+
+span[id="user-name"]{
+    font-weight: bold;
+    color:#9dc5a7
+}
+
+p[id="welcome-fact"]{
+    font-weight: bold;
+}
+
+.feedback {
+    display: block;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.feedback-form {
+    display: inline-block;
+    text-align: left;
+}
+
+.feedback-show {
+    display: inline-block;
+    text-align: center;
+    width: 500px;
+    margin: 0;
+    white-space: normal;
+    overflow-wrap: break-word;
+    font-weight: bold;
+}

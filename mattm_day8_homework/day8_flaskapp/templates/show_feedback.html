@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="feedback">
+        <div class="feedback-title">
+            <h1>Feedback</h1>
+        </div>
+        <div class="about-welcome">
+            {% for date, feedback in feedback_dict.items() %}
+            <p>
+                <span id="welcome-name">{{date}}</span>
+                <span id="user-name"> - {{feedback.name}}:</span>
+            </p>
+            <p class="feedback-show">{{feedback.feedback}}</p>
+            {% endfor %}  
+        </div>
+        <br>
+        <a href="{{url_for('home')}}" class="styled-btn-link">Home</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="feedback">
+        <div class="feedback-title">
+            <h1>Leave Some Feedback!</h1>
+        </div>
+        <div class="feedback-form">
+            <form method="POST">
+                <div class="feedback-form-name">
+                    <label for="name">Name: </label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <br>
+                <div class="feedback-form-text">
+                    <label for="ta-input">What feedback would you like to give:</label>
+                    <br>
+                    <textarea id="ta-input" name="feedback" rows="2"></textarea>
+                </div>    
+                <br>
+                <div class="form-button">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+        <br>
+        <br>
+        <a href="{{url_for('home')}}" class="styled-btn-link">Home</a>
+    </div>
+{% endblock %}
