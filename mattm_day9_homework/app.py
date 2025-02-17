@@ -125,6 +125,7 @@ class DatabaseConnection:
 
 
 db_connect = DatabaseConnection(DATABASE, app)
+db_connect.create_table() # For Python Anywhere
 
 
 @app.route("/")
