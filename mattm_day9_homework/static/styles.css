@@ -31,7 +31,7 @@
 
 .home {
     display: flex;
-    width: 50%;
+    width: 1000px;
     font-family: sans-serif;
     background-color: rgb(238, 222, 204);
     margin: 0 auto;
