@@ -1,0 +1,133 @@
+.flash-messages {
+    height: 50px;
+    margin-bottom: 10px; 
+}
+
+.flash {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    animation: fadeOut 3s forwards; /* Apply the fadeOut animation */
+}
+
+.flash.message {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+
+.flash.error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; display: none; }
+}
+
+.home {
+    display: flex;
+    width: 50%;
+    font-family: sans-serif;
+    background-color: rgb(238, 222, 204);
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.add-task-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-left: 10%;
+    margin-top: 1%;
+}
+
+.task-list {
+    display: flex;
+    min-width: 30%;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 1% auto;
+    margin-left: 8%;
+    margin-right: 2%;
+    background-color: rgb(231, 245, 230);
+    border-radius: 20px;
+}
+
+.edit-task-list {
+    display: flex;
+    min-width: 20%;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+.strikethrough {
+    text-decoration: line-through;
+}
+
+.table-btn {
+    background: none; 
+    border: none; 
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.edit-btn {
+    background: none; 
+    border: none; 
+    cursor: pointer;
+    font-size: 25px;
+}
+
+
+
+h1 {
+    font-family: sans-serif;
+}
+
+table {
+    border-collapse: collapse; 
+}
+
+th {
+    font-size: 23px;
+    text-decoration: underline;
+}
+
+td {
+    max-width: 500px;
+    padding: 5px
+}
+
+button.txt-btn {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button.txt-btn.hover-green:hover {
+    background-color: #c5eccf
+}
+
+
+button.txt-btn.hover-red:hover {
+    background-color: #eddad6
+}
+
+button.txt-btn.hover-blue:hover {
+    background-color: #d6e9ed;
+
+}
