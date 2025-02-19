@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1 style="text-align: center;">Task Lists</h1>
+    <div class="home">
+        <div class="add-task-form">
+            <form action="{{ url_for('add_task_list') }}" method="POST">
+                <p><label for="task_list" style="font-weight: bold; font-size: 18px;">Add Task List: </label></p>
+                <p><input type="text" id="task_list" name="task_list" placeholder="Enter Task List Name"></p>
+                <button class="txt-btn hover-green" type="submit">Create List</button>
+            </form>
+            <div class="flash-messages">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="flash {{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="task-list">
+        {% if task_lists %}
+            <table>
+                {% for task_list in task_lists %}
+                <tr>
+                    <td style="width: 20px; padding-left: 20px;">
+                    <a href="{{ url_for('delete_task_list', list_name=task_list.name )}}">
+                        <button class="delete-btn" type="button">&#x26D4;</button></a>
+                    </td>
+                    <td style="text-align: left;">
+                    <a href="{{ url_for('task_list', list_name=task_list.name) }}">{{task_list.name}}</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <h2>&#x2196; Add a Task List!</h2>
+        {% endif %}
+        </div>
+    </div>
+</body>
+</html>

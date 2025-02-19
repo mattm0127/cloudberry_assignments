@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do-List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1 style="text-align: center;">Are You Sure?</h1>
+    <div class="home">
+        <div class="edit-task-list">
+            {% if delete_type == 'task_list' %}
+                <h2>Are you sure you want to delete {{list_name}} and all contents?</h2>
+                <form action="{{ url_for('delete_task_list', list_name=list_name )}}" method="POST">
+                    <button class="txt-btn hover-red" type="submit">Delete</button>
+                </form>
+                <br>
+                <a href="{{ url_for('home') }}">
+                    <button class="txt-btn hover-blue">Go Back</button>
+                </a>
+                <br>
+            {% elif delete_type == 'task' %}
+                <h2>Are you sure you want to do delete this task?</h2>
+                <form action="{{ url_for('delete_task', list_name=list_name, id=id)}}" method="POST">
+                    <button class="txt-btn hover-red" type="submit">Delete</button>
+                </form>
+                <br>
+                <a href="{{ url_for('task_list', list_name=list_name) }}">
+                    <button class="txt-btn hover-blue">Go Back</button>
+                </a>
+                <br>
+            {% elif delete_type == 'clear' %}
+                <h2>Are you sure you want to clear all tasks from {{list_name}}?</h2>
+                <form action="{{ url_for('clear_tasks', list_name=list_name, id=id)}}" method="POST">
+                    <button class="txt-btn hover-red" type="submit">Clear</button>
+                </form>
+                <br>
+                <a href="{{ url_for('task_list', list_name=list_name) }}">
+                    <button class="txt-btn hover-blue">Go Back</button>
+                </a>
+                <br>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+
+

@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1 style="text-align: center;">My To Do List</h1>
+    <h1 style="text-align: center;">{{ list_name }}</h1>
     <div class="home">
         <div class="add-task-form">
-            <form action="{{ url_for('add_task') }}" method="POST">
+            <form action="{{ url_for('add_task', list_name = list_name) }}" method="POST">
                 <p><label for="task" style="font-weight: bold; font-size: 18px;">Add Task: </label></p>
                 <textarea type="text" id="task" name="task" rows="4" cols="28" placeholder="Enter a Task"></textarea>
                 <p><label for="due_date" style="font-weight: bold; font-size: 18px;">Due: </label>
                 <input type="date" id="due_date" name="due_date"></p>
-                <button class="txt-btn hover-green" type="submit">Submit</button>
+                <button class="txt-btn hover-green" type="submit">Add Task</button>      
+                <a href="{{ url_for('home') }}"><button type="button" class="txt-btn hover-blue">Go Home</button></a>
             </form>
             <div class="flash-messages">
                 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -36,11 +37,11 @@
                     <tr>
                         <td>
                             {% if task.complete %}
-                                <form action="{{ url_for('complete_task', id=task.id) }}" method="POST">
+                                <form action="{{ url_for('complete_task', list_name=list_name, id=task.task_id) }}" method="POST">
                                     <button class="table-btn" type="submit">&#x2705;</button>
                                 </form>
                             {% else %}
-                                <form action="{{ url_for('complete_task', id=task.id) }}" method="POST">
+                                <form action="{{ url_for('complete_task', list_name=list_name, id=task.task_id) }}" method="POST">
                                     <button class="table-btn" type="submit">&#x2B1C;</button>
                                 </form>
                             {% endif %}
@@ -52,21 +53,21 @@
                             {{task.due_date}}
                         </td> 
                         <td>
-                            <a href="{{ url_for('edit_task', id=task.id) }}">
+                            <a href="{{ url_for('edit_task', list_name=list_name, id=task.task_id) }}">
                                 <button class="table-btn">&#x1F4DD;</button>
                             </a>
                         </td>
                         <td>
-                            <form action="{{ url_for('delete_task', id=task.id) }}" method="POST">
-                                <button class="table-btn" type="submit">&#x274C;</button>
+                            <a href="{{ url_for('delete_task', list_name=list_name, id=task.task_id) }}">
+                                <button class="table-btn" type="button">&#x274C;</button>
                             </form>
                         </td>
                     </tr>
                 {% endfor %}
             </table>
             <br>
-            <form action="{{ url_for('clear_tasks') }}" method="POST">
-                <button class="txt-btn hover-red" type="submit">Clear All Tasks</button>
+            <a href="{{ url_for('clear_tasks', list_name=list_name) }}">
+                <button class="txt-btn hover-red" type="button">Clear All Tasks</button>
             </form>
             <br>
         {% else %}
