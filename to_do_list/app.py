@@ -258,7 +258,7 @@ def clear_tasks(list_name):
         db_connect.clear_tasks_post(list_name)
         flash("Task List Cleared.", category="message")
         return redirect(url_for("task_list", list_name=list_name))
-    return render_template("confirm_delete.html", list_name=list_name, id=id, delete_type='clear')
+    return render_template("confirm_delete.html", list_name=list_name, delete_type='clear')
 
 @app.route("/<list_name>/delete", methods=["GET", "POST"])
 def delete_task_list(list_name):

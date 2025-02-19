@@ -35,7 +35,7 @@
                         <button class="delete-btn" type="button">&#x26D4;</button></a>
                     </td>
                     <td style="text-align: left;">
-                    <a href="{{ url_for('task_list', list_name=task_list.name) }}">{{task_list.name}}</a>
+                    <a href="{{ url_for('task_list', list_name=task_list.name) }}" style="color:inherit">{{task_list.name}}</a>
                     </td>
                 </tr>
                 {% endfor %}
