@@ -8,8 +8,14 @@
 </head>
 <body>
     <h1 style="text-align: center;">{{ list_name }}</h1>
+    <p style="text-align: center;">Filters: <a href="{{ url_for('task_list', list_name=list_name, task_filter='all')}}">All</a> - 
+                <a href="{{ url_for('task_list', list_name=list_name, task_filter='complete')}}">Complete</a> - 
+                <a href="{{ url_for('task_list', list_name=list_name, task_filter='incomplete')}}">Incomplete</a>
+    </p>
+    <p style="text-align: center;"><a href="{{ url_for('login') }}">Login</a> - <a href="{{ url_for('logout') }}">Logout</a></p>
     <div class="home">
         <div class="add-task-form">
+            <h3>Hello {{ session.username }}</h3>
             <form action="{{ url_for('add_task', list_name = list_name) }}" method="POST">
                 <p><label for="task" style="font-weight: bold; font-size: 18px;">Add Task: </label></p>
                 <textarea type="text" id="task" name="task" rows="4" cols="28" placeholder="Enter a Task"></textarea>
@@ -37,11 +43,11 @@
                     <tr>
                         <td>
                             {% if task.complete %}
-                                <form action="{{ url_for('complete_task', list_name=list_name, id=task.task_id) }}" method="POST">
+                                <form action="{{ url_for('complete_task', list_name=list_name, id=task.id) }}" method="POST">
                                     <button class="table-btn" type="submit">&#x2705;</button>
                                 </form>
                             {% else %}
-                                <form action="{{ url_for('complete_task', list_name=list_name, id=task.task_id) }}" method="POST">
+                                <form action="{{ url_for('complete_task', list_name=list_name, id=task.id) }}" method="POST">
                                     <button class="table-btn" type="submit">&#x2B1C;</button>
                                 </form>
                             {% endif %}
@@ -53,12 +59,12 @@
                             {{task.due_date}}
                         </td> 
                         <td>
-                            <a href="{{ url_for('edit_task', list_name=list_name, id=task.task_id) }}">
+                            <a href="{{ url_for('edit_task', list_name=list_name, id=task.id) }}">
                                 <button class="table-btn">&#x1F4DD;</button>
                             </a>
                         </td>
                         <td>
-                            <a href="{{ url_for('delete_task', list_name=list_name, id=task.task_id) }}">
+                            <a href="{{ url_for('delete_task', list_name=list_name, id=task.id) }}">
                                 <button class="table-btn" type="button">&#x274C;</button>
                             </form>
                         </td>

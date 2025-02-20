@@ -8,8 +8,16 @@
 </head>
 <body>
     <h1 style="text-align: center;">Task Lists</h1>
+    <p style="text-align: center;">
+        {% if session.uername %}
+            <a href="{{ url_for('login') }}">Login</a>
+        {% else %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+        </p>
     <div class="home">
         <div class="add-task-form">
+            <h3>Hello {{ session.username }}</h3>
             <form action="{{ url_for('add_task_list') }}" method="POST">
                 <p><label for="task_list" style="font-weight: bold; font-size: 18px;">Add Task List: </label></p>
                 <p><input type="text" id="task_list" name="task_list" placeholder="Enter Task List Name"></p>
@@ -35,7 +43,7 @@
                         <button class="delete-btn" type="button">&#x26D4;</button></a>
                     </td>
                     <td style="text-align: left;">
-                    <a href="{{ url_for('task_list', list_name=task_list.name) }}" style="color:inherit">{{task_list.name}}</a>
+                    <a href="{{ url_for('task_list', list_name=task_list.name, task_filter='all') }}" style="color:inherit">{{task_list.name}}</a>
                     </td>
                 </tr>
                 {% endfor %}

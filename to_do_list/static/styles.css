@@ -38,6 +38,16 @@
     border-radius: 20px;
 }
 
+.login {
+    width: 500px;
+    font-family: sans-serif;
+    background-color: rgb(238, 222, 204);
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 20px;
+}
+
 .add-task-form {
     display: flex;
     flex-direction: column;
