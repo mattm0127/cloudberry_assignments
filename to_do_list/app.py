@@ -122,7 +122,7 @@ class DatabaseClient:
         self.db.session.commit()
 
 
- # For Python Anywhere
+# For Python Anywhere
 db_client = DatabaseClient(db)
 db_client.initialize_database()
 
