@@ -1,6 +1,5 @@
 import os
 
-import sqlite3
 from datetime import datetime
 
 from flask import Flask, render_template, redirect, request, flash, url_for, session
