@@ -65,15 +65,28 @@ class DatabaseClient:
         
     def home_get(self):
         task_lists = TaskLists.query.all()
-        return task_lists
+        task_count = {}
+        for task_list in task_lists:
+            task = {}
+            total_tasks = len(Tasks.query.filter(Tasks.task_list_id==task_list.id).all())
+            complete_tasks = len(Tasks.query.filter(
+                        Tasks.task_list_id==task_list.id,
+                        Tasks.complete == True).all()
+                        )
+            task["total_tasks"] = total_tasks
+            task["complete_tasks"] = complete_tasks
+            task_count[task_list.id] = task
+        return task_lists, task_count
     
     def task_list_get(self, name, task_filter):
         if task_filter == 'all':
-            tasks = Tasks.query.join(TaskLists).filter(TaskLists.name == name).all()
+            tasks = Tasks.query.join(TaskLists).filter(TaskLists.name == name).order_by(Tasks.due_date).all()
         elif task_filter == 'complete':
-            tasks = Tasks.query.join(TaskLists).filter(TaskLists.name == name, Tasks.complete == True).all()
+            tasks = Tasks.query.join(TaskLists).filter(TaskLists.name == name, 
+                                                       Tasks.complete == True).order_by(Tasks.due_date).all()
         elif task_filter == 'incomplete':
-            tasks = Tasks.query.join(TaskLists).filter(TaskLists.name == name, Tasks.complete == False).all()
+            tasks = Tasks.query.join(TaskLists).filter(TaskLists.name == name, 
+                                                       Tasks.complete == False).order_by(Tasks.due_date).all()
         return tasks
 
     def add_task_list_post(self, task_list):
@@ -164,8 +177,8 @@ def logout():
 
 @app.route("/home")
 def home():
-    task_lists = db_client.home_get()
-    return render_template("index.html", task_lists=task_lists)
+    task_lists, task_count = db_client.home_get()
+    return render_template("index.html", task_lists=task_lists, task_count=task_count)
 
 @app.route("/add_list", methods=["POST"])
 def add_task_list():
