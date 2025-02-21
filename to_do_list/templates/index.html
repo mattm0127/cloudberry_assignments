@@ -44,7 +44,21 @@
                         <button class="delete-btn" type="button">&#x26D4;</button></a>
                     </td>
                     <td style="text-align: left;">
-                    <a href="{{ url_for('task_list', list_name=task_list.name, task_filter='all') }}" style="color:inherit">{{task_list.name}}</a>
+                    <a href="{{ url_for('task_list', list_name=task_list.name, task_filter='all') }}" style="color:rgb(85, 85, 85)">{{task_list.name}}</a>
+                    </td>
+                    {% if task_count[task_list.id].total_tasks == 0 %}
+                        <td style="text-align: left; color:rgb(116, 175, 185)">
+                    {% elif task_count[task_list.id].complete_tasks == task_count[task_list.id].total_tasks %}
+                        <td style="text-align: left; color:rgb(131, 182, 156)">
+                    {% else %}
+                        <td style="text-align: left; color:rgb(214, 140, 161)">
+                    {% endif %}
+
+                    {% if task_count[task_list.id].total_tasks > 0 %}
+                        {{ task_count[task_list.id].complete_tasks }} of {{ task_count[task_list.id].total_tasks }} Complete
+                    {% else %}
+                        No tasks!
+                    {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
