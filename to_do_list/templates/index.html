@@ -8,13 +8,7 @@
 </head>
 <body>
     <h1 style="text-align: center;">Task Lists</h1>
-    <p style="text-align: center;">
-        {% if session.uername %}
-            <a href="{{ url_for('login') }}">Login</a>
-        {% else %}
-            <a href="{{ url_for('logout') }}">Logout</a>
-        {% endif %}
-        </p>
+    <p style="text-align: center;"><a href="{{ url_for('login') }}">Login</a> - <a href="{{ url_for('logout') }}">Logout</a></p>
     <div class="home">
         <div class="add-task-form">
             <h3>Hello {{ session.username }}</h3>

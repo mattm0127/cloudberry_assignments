@@ -124,6 +124,9 @@ class DatabaseClient:
 
 
 #db_client.initialize_database() # For Python Anywhere
+db_client = DatabaseClient(db)
+db_client.initialize_database()
+
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if request.method == "POST":
