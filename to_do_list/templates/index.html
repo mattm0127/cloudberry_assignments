@@ -8,13 +8,20 @@
 </head>
 <body>
     <h1 style="text-align: center;">Task Lists</h1>
-    <p style="text-align: center;"><a href="{{ url_for('login') }}">Login</a> - <a href="{{ url_for('logout') }}">Logout</a></p>
+    <p style="text-align: center;">
+        {% if 'username' in session.keys() %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+        {% endif %}
+    </p>
     <div class="home">
         <div class="add-task-form">
-            <h3>Hello {{ session.username }}</h3>
+            <h3>Hello {{ session.username if 'username' in session.keys() else 'Guest' }}</h3>
             <form action="{{ url_for('add_task_list') }}" method="POST">
                 <p><label for="task_list" style="font-weight: bold; font-size: 18px;">Add Task List: </label></p>
-                <p><input type="text" id="task_list" name="task_list" placeholder="Enter Task List Name"></p>
+                <p><input type="text" id="task_list" name="task_list" placeholder="Enter Task List Name"
+                        style="padding: 5px; border-radius: 5px; border-width: 1px; border-color: antiquewhite;"></p>
                 <button class="txt-btn hover-green" type="submit">Create List</button>
             </form>
             <div class="flash-messages">

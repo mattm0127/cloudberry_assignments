@@ -15,11 +15,13 @@
         <form action="{{ url_for('register_user') }}" method="POST">
             <p style="text-align: center;">
                 <label id="username" for="username">Username: </label>
-                <input id="username" name="username" placeholder="Please Enter Username">
+                <input id="username" name="username" placeholder="Please Enter Username"
+                        style="padding: 5px; border-radius: 5px; border-width: 1px; border-color: antiquewhite;">
             </p>
             <p style="text-align: center;">
                 <label id="password" for="password">Password: </label>
-                <input id="password" name="password" placeholder="Please Enter Password">
+                <input id="password" name="password" placeholder="Please Enter Password"
+                        style="padding: 5px; border-radius: 5px; border-width: 1px; border-color: antiquewhite;">
             </p>
             <p style="text-align: center;">
                 <button class="txt-btn hover-green"type="submit">Create Account</button>
