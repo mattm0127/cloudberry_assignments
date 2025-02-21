@@ -15,16 +15,19 @@
         <form action="{{ url_for('login') }}" method="POST">
             <p style="text-align: center;">
                 <label id="username" for="username">Username: </label>
-                <input id="username" name="username" placeholder="Please Enter Username">
+                <input id="username" name="username" placeholder="Please Enter Username" 
+                        style="padding: 5px; border-radius: 5px; border-width: 1px; border-color: antiquewhite;">
             </p>
             <p style="text-align: center;">
                 <label id="password" for="password">Password: </label>
-                <input id="password" name="password" placeholder="Please Enter Password">
+                <input id="password" name="password" placeholder="Please Enter Password"
+                        style="padding: 5px; border-radius: 5px; border-width: 1px; border-color: antiquewhite;">
             </p>
-            <p style="text-align: center;">
+            <p style="text-align: center; padding-left: 24%;">
                 <button class="txt-btn hover-green"type="submit">Login</button>
-                <a href="{{ url_for('register_user') }}" style="text-align: right;">Register</a>
+                <a href="{{ url_for('register_user') }}" style="text-align: right;">Create Account</a>
             </p>
+            <p style="text-align: center;"><a href="{{ url_for('home') }}">Continue as Guest</a></p>
         </form>
     </div>
 </body>

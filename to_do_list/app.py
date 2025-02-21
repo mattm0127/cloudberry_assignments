@@ -123,8 +123,18 @@ class DatabaseClient:
         self.db.session.commit()
 
 
-#db_client.initialize_database() # For Python Anywhere
-@app.route('/login', methods=["GET", "POST"])
+ # For Python Anywhere
+db_client = DatabaseClient(db)
+db_client.initialize_database()
+
+def check_edit_privileges(list_name=None, home=False):
+    if not session.get('username'):
+        flash("You must be logged in to edit.", category="message")
+        if home:
+            return redirect(url_for("home"))
+        return redirect(url_for("task_list", list_name=list_name, task_filter='all'))
+
+@app.route('/', methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         username = request.form.get('username')
@@ -153,15 +163,16 @@ def logout():
     session.pop('username')
     return redirect(url_for('login'))
 
-@app.route("/")
+@app.route("/home")
 def home():
-    if not session.get('username'):
-        return redirect(url_for('login'))
     task_lists = db_client.home_get()
     return render_template("index.html", task_lists=task_lists)
 
 @app.route("/add_list", methods=["POST"])
 def add_task_list():
+    block_access = check_edit_privileges(home=True)
+    if block_access:
+        return block_access
     list_name = request.form.get("task_list", None)
     if list_name:
         try:
@@ -178,6 +189,9 @@ def task_list(list_name, task_filter):
 
 @app.route("/<list_name>/add", methods=["POST"])
 def add_task(list_name):
+    block_access = check_edit_privileges(list_name=list_name)
+    if block_access:
+        return block_access
     task = request.form.get("task")
     due_date = request.form.get("due_date", None)
     if task:
@@ -187,6 +201,9 @@ def add_task(list_name):
 
 @app.route("/<list_name>/edit/<int:id>", methods=["GET", "POST"])
 def edit_task(list_name, id):
+    block_access = check_edit_privileges(list_name=list_name)
+    if block_access:
+        return block_access
     if request.method == "POST":
         task = request.form.get("task")
         due_date = request.form.get("due_date")
@@ -202,15 +219,18 @@ def edit_task(list_name, id):
 
 @app.route("/<list_name>/complete/<int:id>", methods=["POST"])
 def complete_task(list_name, id):
+    block_access = check_edit_privileges(list_name=list_name)
+    if block_access:
+        return block_access
     if db_client.complete_task_post(id):
         flash("Task Completed.", category="message")
     return redirect(url_for("task_list", list_name=list_name, task_filter='all'))
 
 @app.route("/<list_name>/delete/<int:id>", methods=["GET", "POST"])
 def delete_task(list_name, id):
-    if not session.get('username'):
-        flash("You must be logged in to edit.", category="message")
-        return redirect(url_for("task_list", list_name=list_name, task_filter='all'))
+    block_access = check_edit_privileges(list_name=list_name)
+    if block_access:
+        return block_access
     if request.method == "POST":
         db_client.delete_task_post(id)
         flash("Task Deleted.", category="message")
@@ -219,9 +239,9 @@ def delete_task(list_name, id):
 
 @app.route("/<list_name>/clear", methods=["GET", "POST"])
 def clear_tasks(list_name):
-    if not session.get('username'):
-        flash("You must be logged in to edit.", category="message")
-        return redirect(url_for("task_list", list_name=list_name, task_filter='all'))
+    block_access = check_edit_privileges(list_name=list_name)
+    if block_access:
+        return block_access
     if request.method == "POST":
         db_client.clear_tasks_post(list_name)
         flash("Task List Cleared.", category="message")
@@ -230,9 +250,9 @@ def clear_tasks(list_name):
 
 @app.route("/<list_name>/delete", methods=["GET", "POST"])
 def delete_task_list(list_name):
-    if not session.get('username'):
-        flash("You must be logged in to edit.", category="message")
-        return redirect(url_for("task_list", list_name=list_name, task_filter='all'))
+    block_access = check_edit_privileges(home=True)
+    if block_access:
+        return block_access
     if request.method == "POST":
         db_client.delete_task_list_post(list_name)
         flash("Task List Deleted.", category="message")

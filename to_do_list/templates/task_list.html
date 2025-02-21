@@ -12,17 +12,25 @@
                 <a href="{{ url_for('task_list', list_name=list_name, task_filter='complete')}}">Complete</a> - 
                 <a href="{{ url_for('task_list', list_name=list_name, task_filter='incomplete')}}">Incomplete</a>
     </p>
-    <p style="text-align: center;"><a href="{{ url_for('login') }}">Login</a> - <a href="{{ url_for('logout') }}">Logout</a></p>
+    <p style="text-align: center;">
+        {% if 'username' in session.keys() %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+        {% endif %}
+    </p>
     <div class="home">
         <div class="add-task-form">
             <h3>Hello {{ session.username }}</h3>
             <form action="{{ url_for('add_task', list_name = list_name) }}" method="POST">
                 <p><label for="task" style="font-weight: bold; font-size: 18px;">Add Task: </label></p>
-                <textarea type="text" id="task" name="task" rows="4" cols="28" placeholder="Enter a Task"></textarea>
+                <textarea type="text" id="task" name="task" rows="4" cols="28" placeholder="Enter a Task"
+                    style="padding: 5px; border-radius: 5px; border-width: 1px; border-color: antiquewhite;"></textarea>
                 <p><label for="due_date" style="font-weight: bold; font-size: 18px;">Due: </label>
-                <input type="date" id="due_date" name="due_date"></p>
-                <button class="txt-btn hover-green" type="submit">Add Task</button>      
+                <input type="date" id="due_date" name="due_date" 
+                    style="padding: 5px; border-radius: 5px; border-width: 1px; border-color: antiquewhite;"></p>
                 <a href="{{ url_for('home') }}"><button type="button" class="txt-btn hover-blue">Go Home</button></a>
+                <button class="txt-btn hover-green" type="submit">Add Task</button>      
             </form>
             <div class="flash-messages">
                 {% with messages = get_flashed_messages(with_categories=true) %}
