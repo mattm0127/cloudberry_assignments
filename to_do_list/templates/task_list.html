@@ -44,49 +44,49 @@
         </div>
         <div class="task-list">
             {% if tasks %}
-            <table>
-                <tr><th></th><th style="text-align:left; padding-left: 3%;">Tasks</th><th>Due</th><th></th><th></th></tr>
+                <table>
+                    <tr><th></th><th style="text-align:left; padding-left: 3%;">Tasks</th><th>Due</th><th></th><th></th></tr>
+                    <br>
+                    {% for task in tasks %}
+                        <tr>
+                            <td>
+                                {% if task.complete %}
+                                    <form action="{{ url_for('complete_task', list_name=list_name, id=task.id) }}" method="POST">
+                                        <button class="table-btn" type="submit">&#x2705;</button>
+                                    </form>
+                                {% else %}
+                                    <form action="{{ url_for('complete_task', list_name=list_name, id=task.id) }}" method="POST">
+                                        <button class="table-btn" type="submit">&#x2B1C;</button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                            <td style="text-align: left; padding-right: 10px; overflow-wrap: break-word;" class="{% if task.complete %}strikethrough{% endif %}">
+                                {{task.task}}
+                            </td>
+                            <td class="{% if task.complete %}strikethrough{% endif %}">
+                                {{task.due_date}}
+                            </td> 
+                            <td>
+                                <a href="{{ url_for('edit_task', list_name=list_name, id=task.id) }}">
+                                    <button class="table-btn">&#x1F4DD;</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ url_for('delete_task', list_name=list_name, id=task.id) }}">
+                                    <button class="table-btn" type="button">&#x274C;</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
                 <br>
-                {% for task in tasks %}
-                    <tr>
-                        <td>
-                            {% if task.complete %}
-                                <form action="{{ url_for('complete_task', list_name=list_name, id=task.id) }}" method="POST">
-                                    <button class="table-btn" type="submit">&#x2705;</button>
-                                </form>
-                            {% else %}
-                                <form action="{{ url_for('complete_task', list_name=list_name, id=task.id) }}" method="POST">
-                                    <button class="table-btn" type="submit">&#x2B1C;</button>
-                                </form>
-                            {% endif %}
-                        </td>
-                        <td style="text-align: left; padding-right: 10px; overflow-wrap: break-word;" class="{% if task.complete %}strikethrough{% endif %}">
-                            {{task.task}}
-                        </td>
-                        <td class="{% if task.complete %}strikethrough{% endif %}">
-                            {{task.due_date}}
-                        </td> 
-                        <td>
-                            <a href="{{ url_for('edit_task', list_name=list_name, id=task.id) }}">
-                                <button class="table-btn">&#x1F4DD;</button>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{{ url_for('delete_task', list_name=list_name, id=task.id) }}">
-                                <button class="table-btn" type="button">&#x274C;</button>
-                            </form>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-            <br>
-            <a href="{{ url_for('clear_tasks', list_name=list_name) }}">
-                <button class="txt-btn hover-red" type="button">Clear All Tasks</button>
-            </form>
-            <br>
-        {% else %}
-            <h2>&#x2196; Add a Task!</h2>
-        {% endif %}
+                <a href="{{ url_for('clear_tasks', list_name=list_name) }}">
+                    <button class="txt-btn hover-red" type="button">Clear All Tasks</button>
+                </form>
+                <br>
+            {% else %}
+                <h2>&#x2196; Add a Task!</h2>
+            {% endif %}
         </div>
     </div>
 </body>

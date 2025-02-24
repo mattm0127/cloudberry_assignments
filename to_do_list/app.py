@@ -4,6 +4,7 @@ from datetime import datetime
 
 from flask import Flask, render_template, redirect, request, flash, url_for, session
 from flask_sqlalchemy import SQLAlchemy
+import bcrypt
 
 app = Flask(__name__)
 app.secret_key = "pick something secure"
@@ -45,7 +46,9 @@ class DatabaseClient:
 
     def add_user(self, username, password):
         try:
-            new_user = Users(username=username, password=password)
+            salt = bcrypt.gensalt()
+            enc_password = bcrypt.hashpw(password.encode("utf-8"), salt)
+            new_user = Users(username=username, password=enc_password)
             self.db.session.add(new_user)
             self.db.session.commit()
             return True
@@ -55,14 +58,13 @@ class DatabaseClient:
     def valiate_user(self, username, password):
         try:
             user = Users.query.filter(Users.username==username).first()
-            if user.password == password:
+            if bcrypt.checkpw(password.encode("utf-8"), user.password):
                 return True
             else:
                 return False
         except Exception:
             return False
 
-        
     def home_get(self):
         task_lists = TaskLists.query.all()
         task_count = {}
@@ -98,8 +100,8 @@ class DatabaseClient:
             raise Exception
 
     def add_task_post(self, task_list, task, due_date):
-        task_list_id = TaskLists.query.filter(TaskLists.name == task_list)[0]
-        new_task = Tasks(task_list_id = task_list_id.id, task=task, due_date=due_date)
+        task_list_id = TaskLists.query.filter(TaskLists.name == task_list)[0].id
+        new_task = Tasks(task_list_id = task_list_id, task=task, due_date=due_date)
         self.db.session.add(new_task)
         self.db.session.commit()
 
@@ -162,8 +164,11 @@ def register_user():
     if request.method == "POST":
         username = request.form.get('username')
         password = request.form.get('password')
-        if not username or not password:
+        c_password = request.form.get('c_password')
+        if not username or not password or not c_password:
             return render_template('register.html', error='Please Enter a Username and Password.')
+        if password != c_password:
+            return render_template('register.html', error="Passwords Do Not Match.")
         if db_client.add_user(username, password):
             session['username'] = username
             return redirect(url_for("home"))
